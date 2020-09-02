@@ -1344,4 +1344,4 @@ const myCarsArray = [
         "Class": "Sedan"
     }
 ];
-localStorage.setItem("myCarsArray", JSON.stringify(myCarsArray))
+localStorage.setItem("myCarsArray", JSON.stringify(myCarsArray));
