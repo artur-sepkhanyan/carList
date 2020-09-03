@@ -41,11 +41,12 @@
    cursor: pointer;
  }
 
- #line{
+ #line, #lineEdit{
      text-align: center;
      padding: 10px;
      display: none;
  }
+
  
  input{
      margin: 5px;
