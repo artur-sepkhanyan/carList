@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="loginRegistration.css">
+    <title>Registration</title>
+</head>
+<body>
+    <div class="login">
+        <form name='form-login'>
+            <label for="name">Name Surname</label>
+            <input type="text" id="nameSurname" required>
+    
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+    
+            <label for="pw">Password</label>
+            <input type="password" id= "pw" required>
+
+            <label for="pw">Confirm Password</label>
+            <input type="password" id= "cpw" required>
+    
+            <input id="rgstr_btn" type="button" value="Register" >
+            
+            <a href="login.html" id="goTo"><input id="rgstr_btn" type="button" value="Go to Login" onclick="store()"></a> 
+        </form>
+        <script src="loginRegistration.js"></script>
+    </div>
+    
+   
+    
+</body>
+</html>

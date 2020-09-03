@@ -115,7 +115,7 @@ function table(cars) {
                         inputsDivEdit.style.display = "none";
                     }
                 })
-                
+
 
             }
 
@@ -202,7 +202,7 @@ function addCar() {
 }
 createButton.addEventListener('click', addCar);
 
-function editFields(i){
+function editFields(i) {
     brandInputEdit.value = cars[i].Brand;
     dateInputEdit.value = cars[i].Date;
     transmisionInputEdit.value = cars[i].Transmission;
@@ -211,7 +211,7 @@ function editFields(i){
     hpInputEdit.value = cars[i].Horsepower;
 }
 
-function update(){
+function update() {
     cars[nowEditingIndex].Brand = brandInputEdit.value;
     cars[nowEditingIndex].Date = dateInputEdit.value;
     cars[nowEditingIndex].Transmission = transmisionInputEdit.value;
