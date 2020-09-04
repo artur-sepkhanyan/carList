@@ -41,7 +41,7 @@
    cursor: pointer;
  }
 
- #line, #lineEdit{
+ #line, #editLine{
      text-align: center;
      padding: 10px;
      display: none;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Cars</title>
 </head>
+
 <body>
-    <!-- <div id="line">
+    <div id="line">
         <div>
-            <input type="text" placeholder="Brand" class="Brand">
-            <input type="text" placeholder="Date" class="Date">
-            <input type="text" placeholder="Transmision" class="Transmission">
+            <input type="text" placeholder="Brand" id="Brand">
+            <input type="text" placeholder="Date" id="Date">
+            <input type="text" placeholder="Transmision" id="Transmission">
         </div>
         <div>
-            <input type="text" placeholder="Model" class="Model">
-            <input type="text" placeholder="Color" class="Color">
-            <input type="text" placeholder="HP" class="HP">
+            <input type="text" placeholder="Model" id="Model">
+            <input type="text" placeholder="Color" id="Color">
+            <input type="text" placeholder="HP" id="HP">
         </div>
         <button id="createButton">Create</button>
-    </div> -->
-    <script src="cars.js"></script> 
-    <script src="allCars.js"></script> 
+    </div>
+    <div id="editLine">
+        <div>
+            <input type="text" id="BrandEdit">
+            <input type="text" id="DateEdit">
+            <input type="text" id="TransmissionEdit">
+        </div>
+        <div>
+            <input type="text" id="ModelEdit">
+            <input type="text" id="ColorEdit">
+            <input type="text" id="editHp">
+        </div>
+        <button id="editButton">Edit</button>
+    </div>
+    <button id="addButton" onclick="hideShow()">Add</button>
+    <script src="cars.js"></script>
+    <script src="allCars.js"></script>
 </body>
+
 </html>

@@ -1,7 +1,7 @@
 const registeredUsers = localStorage.getItem('users');
 const users = registeredUsers ? JSON.parse(registeredUsers) : [];
 const reg = document.getElementById('rgstr_btn');
-const log = document.getElementById('log_btn');
+const log = document.getElementById('form-login');
 const lowerCaseLetters = /[a-z]/g;
 const upperCaseLetters = /[A-Z]/g;
 const numbers = /[0-9]/g;
@@ -27,22 +27,26 @@ let store = () => {
         users.push(myUsers);
         localStorage.setItem('users', JSON.stringify(users));
         alert('Your account has been created');
-        console.log(typeof (users));
+
     }
 }
 
-let check = () => {
+let check = (e) => {
+    e.preventDefault()
+    debugger
     let email = document.forms[0].userName.value;
-    let pass = document.forms[0].uservalue;
+    let pass = document.forms[0].userPw.value;
 
-    const user = users.find(el => {
-        return el.email === email && el.pass === pass;
+    debugger
+    let user = users.find(el => {
+        return el.email === email && el.password === pass;
     });
     if (user) {
         alert('You are logged in.');
+        window.location = 'file:///Users/fastshift/Desktop/Internship/deleteCar/cars.html'
     } else {
         alert('User not found');
     }
 }
-//reg.addEventListener('click', store);
-//log.addEventListener('click', check);
+reg.addEventListener('click', store);
+log.addEventListener('submit', check);

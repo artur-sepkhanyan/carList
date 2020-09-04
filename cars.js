@@ -1,64 +1,32 @@
-let inputFirstLine = document.createElement("div");
-let inputSecondLine = document.createElement("div");
-let inputsDiv = document.createElement("div");
-let brandInput = document.createElement("input");
-brandInput.setAttribute("placeholder", "Brand");
-let dateInput = document.createElement("input");
-dateInput.setAttribute("placeholder", "Date");
-let transmisionInput = document.createElement("input");
-transmisionInput.setAttribute("placeholder", "Transmision");
-let modelInput = document.createElement("input");
-modelInput.setAttribute("placeholder", "Model");
-let colorInput = document.createElement("input");
-colorInput.setAttribute("placeholder", "Color");
-let hpInput = document.createElement("input");
-hpInput.setAttribute("placeholder", "HP");
-let createButton = document.createElement("button");
-createButton.innerText = "Create";
+const inputsDiv = document.getElementById("line");
 
-let inputFirstLineEdit = document.createElement("div");
-let inputSecondLineEdit = document.createElement("div");
-let inputsDivEdit = document.createElement("div");
-let brandInputEdit = document.createElement("input");
-let dateInputEdit = document.createElement("input");
-let transmisionInputEdit = document.createElement("input");
-let modelInputEdit = document.createElement("input");
-let colorInputEdit = document.createElement("input");
-let hpInputEdit = document.createElement("input");
-let ButtonEdit = document.createElement("button");
-ButtonEdit.innerText = "Edit";
+const createButton = document.getElementById("createButton");
 
-let addButton = document.createElement("button");
-addButton.innerText = "Add Car";
+const brandInput = document.getElementById("Brand");
+const dateInput = document.getElementById("Date");
+const transmisionInput = document.getElementById("Transmission");
+const modelInput = document.getElementById("Model");
+const colorInput = document.getElementById("Color");
+const hpInput = document.getElementById("HP");
 
-inputsDiv.appendChild(inputFirstLine);
-inputsDiv.appendChild(inputSecondLine);
-inputsDiv.appendChild(createButton);
-inputFirstLine.appendChild(brandInput);
-inputFirstLine.appendChild(dateInput);
-inputFirstLine.appendChild(transmisionInput);
-inputSecondLine.appendChild(modelInput);
-inputSecondLine.appendChild(colorInput);
-inputSecondLine.appendChild(hpInput);
-inputsDiv.setAttribute("id", "line");
+const inputsDivEdit = document.getElementById("editLine");
 
-inputsDivEdit.appendChild(inputFirstLineEdit);
-inputsDivEdit.appendChild(inputSecondLineEdit);
-inputsDivEdit.appendChild(ButtonEdit);
-inputFirstLineEdit.appendChild(brandInputEdit);
-inputFirstLineEdit.appendChild(dateInputEdit);
-inputFirstLineEdit.appendChild(transmisionInputEdit);
-inputSecondLineEdit.appendChild(modelInputEdit);
-inputSecondLineEdit.appendChild(colorInputEdit);
-inputSecondLineEdit.appendChild(hpInputEdit);
-inputsDivEdit.setAttribute("id", "lineEdit");
+const editButton = document.getElementById("editButton");
+const addButton = document.getElementById("addButton");
+
+const brandInputEdit = document.getElementById("BrandEdit");
+const dateInputEdit = document.getElementById("DateEdit");
+const transmisionInputEdit = document.getElementById("TransmissionEdit");
+const modelInputEdit = document.getElementById("ModelEdit");
+const colorInputEdit = document.getElementById("ColorEdit");
+const hpInputEdit = document.getElementById("editHp");
 
 const car = JSON.parse(localStorage.getItem("myCarsArray"));
 
 const body = document.getElementsByTagName('body')[0];
 
-let mainDiv = document.createElement('div');
-let pagination = document.createElement('div');
+const mainDiv = document.createElement('div');
+const pagination = document.createElement('div');
 
 body.appendChild(mainDiv);
 body.appendChild(pagination);
@@ -66,7 +34,7 @@ body.appendChild(inputsDiv);
 body.appendChild(inputsDivEdit);
 body.appendChild(addButton);
 
-let mainTable = document.createElement('table');
+const mainTable = document.createElement('table');
 mainTable.setAttribute("id", "tableStyle");
 
 const page = 10;
@@ -74,49 +42,32 @@ const myCars = ["Model", "Brand", "Date", "Horsepower", "Transmission", "Class",
 cars = car.slice(0, page)
 
 function table(cars) {
-    let row = document.createElement('tr');
+    const row = document.createElement('tr');
     for (let i = 0; i < myCars.length; i++) {
-        let th = document.createElement('th');
+        const th = document.createElement('th');
         th.innerText = (myCars[i]);
-        th.setAttribute('draggable', 'true');
-        th.setAttribute('ondragstart', 'dragStart(' + i + ', event)');
-        th.setAttribute('ondragover', 'dragOver()');
-        th.setAttribute('ondrop', 'onDrop()');
+        if (i < myCars.length - 2) {
+            th.setAttribute('draggable', 'true');
+            th.setAttribute('ondragstart', 'dragStart(' + i + ', event)');
+            th.setAttribute('ondragover', 'dragOver()');
+            th.setAttribute('ondrop', 'onDrop()');
+        }
         row.appendChild(th);
     }
+
+
     mainTable.appendChild(row);
 
-    for (var i = 0; i < cars.length; i++) {
-        var tr = document.createElement('tr');
-        for (var j = 0; j < myCars.length; j++) {
-            var td = document.createElement('td');
+    for (let i = 0; i < cars.length; i++) {
+        const tr = document.createElement('tr');
+        for (let j = 0; j < myCars.length; j++) {
+            let td = document.createElement('td');
             cars[i].Remove = "Remove";
             cars[i].Edit = "Edit";
             if (j === myCars.length - 2) {
-                td.addEventListener("click", () => {
-                    const result = confirm("Are you sure you want to delete?");
-                    if (result) {
-                        let id = event.target.getAttribute('data-id');
-                        car.splice(id, 1)
-                        mainTable.innerHTML = "";
-                        localStorage.setItem("myCarsArray", JSON.stringify(car));
-                        table(car.slice(0, page));
-                    }
-                })
+                td.addEventListener("click", removeField);
             } else if (j === myCars.length - 1) {
-                td.addEventListener("click", () => {
-                    const editResult = confirm("Are you sure you want to edit");
-                    if (editResult) {
-                        let id = event.target.getAttribute('data-id');
-                        inputsDivEdit.style.display = "block";
-                        nowEditingIndex = id;
-                        editFields(id);
-                    } else {
-                        inputsDivEdit.style.display = "none";
-                    }
-                })
-
-
+                td.addEventListener("click", editDisplay);
             }
 
             td.setAttribute('data-id', i);
@@ -128,7 +79,6 @@ function table(cars) {
     }
     mainDiv.appendChild(mainTable);
     pagination.innerHTML = "";
-
 
     createPagination();
 }
@@ -146,10 +96,7 @@ function createPagination() {
         li.innerHTML = i;
         ul.appendChild(li);
         items.push(li);
-    }
-
-    for (let item of items) {
-        item.addEventListener('click', function () {
+        li.addEventListener('click', function () {
             let numbers = +this.innerHTML;
             let first = (numbers - 1) * page;
             let last = first + page;
@@ -158,6 +105,7 @@ function createPagination() {
             table(notes);
         })
     }
+
     pagination.appendChild(ul);
 }
 
@@ -168,14 +116,15 @@ function dragOver() {
     event.preventDefault();
 }
 function onDrop() {
-    let data = event.dataTransfer.getData('id');
+    let dragId = event.dataTransfer.getData('id');
+    let dragColumn = myCars.splice(dragId, 1).toString();
     let thIndex = myCars.indexOf(event.target.innerHTML);
-    myCars[data] = myCars.splice(thIndex, 1, myCars[data]);
+    myCars.splice(thIndex, 0, dragColumn);
     mainTable.innerHTML = "";
     table(car.slice(0, page));
 }
 
-addButton.onclick = function () {
+function hideShow() {
     if (inputsDiv.style.display !== "block") {
         inputsDiv.style.display = "block";
     } else {
@@ -193,14 +142,39 @@ class CarsAdd {
         this.Class = carClass;
     }
 }
+
+function removeField() {
+    const result = confirm("Are you sure you want to delete?");
+    if (result) {
+        let id = event.target.getAttribute('data-id');
+        car.splice(id, 1)
+        mainTable.innerHTML = "";
+        localStorage.setItem("myCarsArray", JSON.stringify(car));
+        table(car.slice(0, page));
+    }
+
+}
 function addCar() {
     let newCars = new CarsAdd(brandInput.value, dateInput.value, transmisionInput.value, modelInput.value, colorInput.value, hpInput.value);
     car.unshift(newCars);
     mainTable.innerHTML = "";
     localStorage.setItem("myCarsArray", JSON.stringify(car));
     table(car.slice(0, page));
+    inputsDiv.style.display = "none";
 }
 createButton.addEventListener('click', addCar);
+
+function editDisplay() {
+    const editResult = confirm("Are you sure you want to edit ?");
+    if (editResult) {
+        let id = event.target.getAttribute('data-id');
+        inputsDivEdit.style.display = "block";
+        nowEditingIndex = id;
+        editFields(id);
+    } else {
+        inputsDivEdit.style.display = "none";
+    }
+}
 
 function editFields(i) {
     brandInputEdit.value = cars[i].Brand;
@@ -221,5 +195,6 @@ function update() {
     mainTable.innerHTML = "";
     localStorage.setItem("myCarsArray", JSON.stringify(car));
     table(car.slice(0, page));
+    inputsDivEdit.style.display = "none";
 }
-ButtonEdit.addEventListener('click', update)
+editButton.addEventListener('click', update)
