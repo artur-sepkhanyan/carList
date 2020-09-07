@@ -28,6 +28,9 @@ const body = document.getElementsByTagName('body')[0];
 const mainDiv = document.createElement('div');
 const pagination = document.createElement('div');
 
+const searchButton = document.getElementById("searchButton");
+const searchInput = document.getElementById("searchInput");
+
 body.appendChild(mainDiv);
 body.appendChild(pagination);
 body.appendChild(inputsDiv);
@@ -61,7 +64,7 @@ function table(cars) {
     for (let i = 0; i < cars.length; i++) {
         const tr = document.createElement('tr');
         for (let j = 0; j < myCars.length; j++) {
-            let td = document.createElement('td');
+            var td = document.createElement('td');
             cars[i].Remove = "Remove";
             cars[i].Edit = "Edit";
             if (j === myCars.length - 2) {
@@ -75,12 +78,14 @@ function table(cars) {
             tr.appendChild(td);
             tr.setAttribute("data-order", i);
             mainTable.appendChild(tr);
+
         }
     }
     mainDiv.appendChild(mainTable);
     pagination.innerHTML = "";
 
     createPagination();
+
 }
 
 table(car.slice(0, page));
@@ -198,3 +203,21 @@ function update() {
     inputsDivEdit.style.display = "none";
 }
 editButton.addEventListener('click', update)
+
+function search(){
+    let arr = car.filter((item) => {
+        for (let key in item) {
+            if (item[key]
+                .toLowerCase()
+                .match(searchInput.value
+                .toLowerCase())) {
+                return true;
+            }
+        }
+    })  
+    mainTable.innerHTML = "";
+    localStorage.setItem("myCarsArray", JSON.stringify(arr));
+    table(arr.slice(0, page));
+}
+searchButton.addEventListener("click", search)
+

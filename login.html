@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="loginRegistration.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Login</title>
 </head>
+
 <body>
     <div class="login">
         <form id='form-login'>
-    
-            <label for="userName">Username or Email</label>
+
+            <label for="userName" id="changeUserName">Username or Email</label>
             <input type="email" id="userName" required>
-    
-            <label for="userPw">Password</label>
-            <input type="password" id= "userPw" required>
-    
-            <input id= "log_btn" value="Login" type="submit">
+
+            <label for="userPw" id="changePassword">Password</label>
+            <input type="password" id="userPw" required>
+
+            <input id="log_btn" value="Login" type="submit">
             <a href="registration.html" id="goTo"><input id="rgstr_btn" type="button" value="Go to Register"></a>
         </form>
-        <script src="loginRegistration.js"></script>
+        <label for="language">Language</label>
+
+        <select id="language">
+            <option value="EN">English</option>
+            <option value="RU">Русский</option>
+            <option value="HY">Հայերեն</option>
+        </select>
     </div>
+    <script type="module" src="loginRegistration.js"></script>
 </body>
+
 </html>

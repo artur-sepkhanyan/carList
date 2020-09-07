@@ -32,3 +32,11 @@
     cursor: pointer;
     transition: background 0.3s ease-in-out;
   }
+
+  i{
+    margin-left: 60%;
+    font-size: 50%;
+ }
+ #language{
+   
+ }
