@@ -207,7 +207,7 @@ editButton.addEventListener('click', update)
 function search(){
     let arr = car.filter((item) => {
         for (let key in item) {
-            if (item[key].toLowerCase() && item[key].match(searchInput.value.toLowerCase())) {
+            if (item[key].toLowerCase().match(searchInput.value.toLowerCase())) {
                 return true;
             }
         }
